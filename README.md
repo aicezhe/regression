@@ -41,6 +41,8 @@ Analyzing the data revealed sufficiently linear dependencies — a natural fit f
 
 Binary features were encoded as 0/1. Furnishing status was ordinally encoded (unfurnished=0, semi-furnished=1, furnished=2) reflecting a natural quality progression. For Ridge, a log transformation was applied to `price` and all features were standardized with `StandardScaler` — required so the L2 penalty applies evenly across coefficients of different scales. Random Forest required neither transformation nor scaling, as tree-based models are scale-invariant.
 
+**Data loading via SQL.** In the Ridge pipeline, data is loaded into a SQLite database and queried using SQL rather than read directly from CSV. In real company environments, data rarely lives in flat files — it is stored in relational databases and accessed through SQL queries. By integrating SQLite and `pd.read_sql()`, this project reflects that workflow and demonstrates basic SQL proficiency alongside Python.
+
 ---
 
 ## Feature Engineering
