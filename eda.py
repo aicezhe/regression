@@ -1,7 +1,3 @@
-# =============================================================
-# HOUSING PRICE PREDICTION — Exploratory Data Analysis (EDA)
-# =============================================================
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,9 +5,7 @@ import seaborn as sns
 import warnings
 warnings.filterwarnings("ignore")
 
-# =============================================================
-# 1. LOAD DATA
-# =============================================================
+
 
 df = pd.read_csv("Housing.csv")
 
@@ -26,9 +20,7 @@ print(df.isnull().sum())
 print("\nBasic statistics:")
 print(df.describe())
 
-# =============================================================
-# 2. ENCODE FOR CORRELATION ANALYSIS
-# =============================================================
+
 
 df_enc = df.copy()
 binary_cols = ["mainroad", "guestroom", "basement",
@@ -39,9 +31,7 @@ df_enc["furnishingstatus"] = df_enc["furnishingstatus"].map(
     {"furnished": 2, "semi-furnished": 1, "unfurnished": 0}
 )
 
-# =============================================================
-# 3. EDA PLOTS
-# =============================================================
+
 
 fig, axes = plt.subplots(2, 3, figsize=(16, 10))
 fig.suptitle("EDA — Housing Price Dataset", fontsize=16, fontweight="bold")
@@ -90,9 +80,7 @@ plt.savefig("eda.png", dpi=150, bbox_inches="tight")
 plt.close()
 print("\n[Saved] eda.png")
 
-# =============================================================
-# 4. CORRELATION HEATMAP
-# =============================================================
+
 
 fig, ax = plt.subplots(figsize=(10, 8))
 mask = np.triu(np.ones_like(df_enc.corr(), dtype=bool))
@@ -104,4 +92,4 @@ plt.savefig("eda_heatmap.png", dpi=150, bbox_inches="tight")
 plt.close()
 print("[Saved] eda_heatmap.png")
 
-print("\n✅ EDA complete!")
+print("\n EDA complete!")
