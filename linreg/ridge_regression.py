@@ -83,9 +83,6 @@ plt.close()
 print("\n[Saved] eda.png")
 
 
-# =============================================================
-# 3. PREPROCESSING
-# =============================================================
 
 df = df_numeric.copy()
 
@@ -98,9 +95,6 @@ print("Furnishing status: furnished=2, semi-furnished=1, unfurnished=0")
 print("Target: log(price) to reduce skewness")
 
 
-# =============================================================
-# 4. FEATURE ENGINEERING
-# =============================================================
 
 # Price per square foot (interaction feature)
 df["area_per_room"] = df["area"] / (df["bedrooms"] + df["bathrooms"])
@@ -116,9 +110,6 @@ print("\n--- Feature Engineering ---")
 print("New features: area_per_room, amenities_score, bath_bed_ratio")
 
 
-# =============================================================
-# 5. TRAIN / TEST SPLIT
-# =============================================================
 
 FEATURES = ["area", "bedrooms", "bathrooms", "stories", "mainroad",
             "guestroom", "basement", "hotwaterheating", "airconditioning",
@@ -141,9 +132,7 @@ X_train_sc = scaler.fit_transform(X_train)
 X_test_sc  = scaler.transform(X_test)
 
 
-# =============================================================
-# 6. HYPERPARAMETER TUNING — GridSearchCV for alpha
-# =============================================================
+
 
 print("\n--- GridSearchCV: tuning alpha ---")
 
@@ -189,9 +178,7 @@ plt.close()
 print("[Saved] alpha_tuning.png")
 
 
-# =============================================================
-# 7. FINAL MODEL TRAINING
-# =============================================================
+
 
 model = Ridge(alpha=best_alpha)
 model.fit(X_train_sc, y_train)
@@ -202,9 +189,7 @@ print(f"\n--- Final Model (α={best_alpha}) ---")
 print(f"CV R²: {cv_scores.mean():.4f} ± {cv_scores.std():.4f}")
 
 
-# =============================================================
-# 8. EVALUATION ON TEST SET
-# =============================================================
+
 
 y_pred_log = model.predict(X_test_sc)
 
@@ -224,9 +209,7 @@ print(f"RMSE: {rmse:,.0f}")
 print(f"MAPE: {mape:.2f}%")
 
 
-# =============================================================
-# 9. RESULTS VISUALIZATION
-# =============================================================
+
 
 fig, axes = plt.subplots(1, 3, figsize=(16, 5))
 fig.suptitle(f"Ridge Regression Results (α={best_alpha})", fontsize=14, fontweight="bold")
